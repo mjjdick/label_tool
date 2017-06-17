@@ -22,7 +22,7 @@ std::string dir_path = "/home/mjj/roboTool/src/cv_label/data/img";//到img
 std::string dir_path = "/home/mjj/roboTool/src/cv_label/data";//到dat
 ```
 
-3 运行manas_listen_rosbag_to_pcd节点，将订阅的velodyne_points转化为pcd，并将pcd转化为png
+3 运行listen_rosbag_to_pcd节点，将订阅的velodyne_points转化为pcd，并将pcd转化为png
 ```
     rosrun cv_label listen_rosbag_to_pcd
     //开启listen_rosbag_to_pcd节点后，再运行bag文件
