@@ -1,6 +1,3 @@
-//
-// Created by mjj on 17-6-14.
-//
 #include <ros/ros.h>
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
@@ -46,9 +43,17 @@ void fullscanCallback(const sensor_msgs::PointCloud2 msg){
 
     for (int i = 0; i < in_cloud_ptr->size(); ++i) {
         pcl::PointXYZI tmp_cloud_point = in_cloud_ptr->points[i];
-        if (fabs(tmp_cloud_point.x) > g_trans_param.max_width_ || fabs(tmp_cloud_point.y) > g_trans_param.max_height_)continue;
-        cv::Point2i tmp_cv_point = trans_grid(cv::Point2f(tmp_cloud_point.x,tmp_cloud_point.y));
-        trans_img.at<uchar>(tmp_cv_point.y,tmp_cv_point.x) = 255;
+        if(tmp_cloud_point.x == tmp_cloud_point.x && tmp_cloud_point.y == tmp_cloud_point.y && tmp_cloud_point.z == tmp_cloud_point.z){
+            if (fabs(tmp_cloud_point.x) > g_trans_param.max_width_ || fabs(tmp_cloud_point.y) > g_trans_param.max_height_)continue;
+            cv::Point2i tmp_cv_point = trans_grid(cv::Point2f(tmp_cloud_point.x,tmp_cloud_point.y));
+            trans_img.at<uchar>(tmp_cv_point.y,tmp_cv_point.x) = 255;
+        }else{
+            in_cloud_ptr->points[i].x = 0.;in_cloud_ptr->points[i].y = 0.;in_cloud_ptr->points[i].z = 0.;in_cloud_ptr->points[i].intensity = 0.;
+            tmp_cloud_point = in_cloud_ptr->points[i];
+            if (fabs(tmp_cloud_point.x) > g_trans_param.max_width_ || fabs(tmp_cloud_point.y) > g_trans_param.max_height_)continue;
+            cv::Point2i tmp_cv_point = trans_grid(cv::Point2f(tmp_cloud_point.x,tmp_cloud_point.y));
+            trans_img.at<uchar>(tmp_cv_point.y,tmp_cv_point.x) = 255;
+        }
     }
     std::string img_file = g_trans_param.dir_path_ + "/img/" + num2str(g_trans_param.frame_id_) + g_trans_param.out_type_;
     std::string pcd_file = g_trans_param.dir_path_ + "/pcd/" + num2str(g_trans_param.frame_id_) + g_trans_param.in_type_;
@@ -59,11 +64,11 @@ void fullscanCallback(const sensor_msgs::PointCloud2 msg){
 
 int main(int argc, char** argv)
 {
-    ros::init(argc, argv, "manas_listen_node");
+    ros::init(argc, argv, "listen_node");
     ros::NodeHandle node;
     ros::NodeHandle private_nh("~");
 
-    ros::Subscriber sub_fullscan = node.subscribe("/velodyne_points",10,fullscanCallback);
+    ros::Subscriber sub_fullscan = node.subscribe("/fullscan",10,fullscanCallback);
 
     std::string dir_path = "/home/mjj/roboTool/data";
     std::string in_type = ".pcd";

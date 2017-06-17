@@ -1,9 +1,3 @@
-/*
-Author: mjj
-Date: 2017/05/22
-Copyright: Manas Team
-*/
-
 #include <opencv2/opencv.hpp>
 #include <pcl/point_types.h>
 #include <pcl/io/pcd_io.h>

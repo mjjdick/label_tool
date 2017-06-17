@@ -1,8 +1,3 @@
-/*
-Author: mjj
-Date: 2017/05/22
-Copyright: Manas Team
-*/
 
 #include <opencv2/core/core.hpp>  
 #include <opencv2/highgui/highgui.hpp>

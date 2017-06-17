@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(manas_cv_label)
+project(my_label)
 
 find_package(catkin REQUIRED COMPONENTS
         roscpp
@@ -19,19 +19,19 @@ add_library(label_tool
 target_link_libraries(label_tool ${catkin_LIBRARIES})
 
 ## 2D
-add_executable(manas_cv_main
+add_executable(cv_main
         nodes/main.cpp
 )
-target_link_libraries(manas_cv_main ${catkin_LIBRARIES} label_tool)
+target_link_libraries(cv_main ${catkin_LIBRARIES} label_tool)
 
-add_executable(manas_trans_pcd_image
+add_executable(trans_pcd_image
         nodes/trans_pcd_image.cpp
         )
-target_link_libraries(manas_trans_pcd_image ${catkin_LIBRARIES})
+target_link_libraries(trans_pcd_image ${catkin_LIBRARIES})
 
-add_executable(manas_listen_rosbag_to_pcd
+add_executable(listen_rosbag_to_pcd
         nodes/listen_rosbag_to_pcd.cpp
         )
-target_link_libraries(manas_listen_rosbag_to_pcd ${catkin_LIBRARIES})
+target_link_libraries(listen_rosbag_to_pcd ${catkin_LIBRARIES})
 
 

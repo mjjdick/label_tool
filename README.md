@@ -15,20 +15,20 @@ data
 
 - nodes/main.cpp中修改一处
 ```
-std::string dir_path = "/home/mjj/roboTool/src/manas_cv_label/data/img";//到img
+std::string dir_path = "/home/mjj/roboTool/src/cv_label/data/img";//到img
 ```
 - nodes/listen_rosbag_to_pcd.cpp中修改一处
 ```
-std::string dir_path = "/home/mjj/roboTool/src/manas_cv_label/data";//到dat
+std::string dir_path = "/home/mjj/roboTool/src/cv_label/data";//到dat
 ```
 
 3 运行manas_listen_rosbag_to_pcd节点，将订阅的velodyne_points转化为pcd，并将pcd转化为png
 ```
-    rosrun manas_cv_label manas_listen_rosbag_to_pcd
-    //开启manas_listen_rosbag_to_pcd节点后，再运行bag文件
+    rosrun cv_label listen_rosbag_to_pcd
+    //开启listen_rosbag_to_pcd节点后，再运行bag文件
 ```
 
-4 运行manas_cv_main节点，进行打标
+4 运行cv_main节点，进行打标
 
 - 点云鼠标左键，移动鼠标画框来对目标进行打标
 - 松开鼠标左键后，需要对目标类别进行打标。按1表示car，按2表示ped
